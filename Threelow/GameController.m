@@ -25,18 +25,22 @@
 
 -(void)roll{
     
-    self.numberOfRolls++;
-    
-    [self.dice removeAllObjects];
-    
-    for (Dice *dice in self.held) {
-        [self.dice addObject:dice];
-    }
-    
-    for (int i = 0; i < 5 - self.held.count; i++) {
-        Dice *singleDice = [Dice new];
-        [singleDice randomValue];
-        [self.dice addObject:singleDice];
+    if (self.numberOfRolls != 5) {
+        self.numberOfRolls++;
+        
+        [self.dice removeAllObjects];
+        
+        for (Dice *dice in self.held) {
+            [self.dice addObject:dice];
+        }
+        
+        for (int i = 0; i < 5 - self.held.count; i++) {
+            Dice *singleDice = [Dice new];
+            [singleDice randomValue];
+            [self.dice addObject:singleDice];
+        }
+    } else {
+        NSLog(@"You must reset after 5 rolls.");
     }
     NSLog(@"%@", self);
 }
