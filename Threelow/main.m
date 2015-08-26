@@ -7,11 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Dice.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        
+        for (int i = 0; i < 5; i++) {
+            Dice *dice = [[Dice alloc] init];
+            [dice randomValue];
+            NSLog(@"%d", dice.currentValue);
+        }
+        
     }
     return 0;
 }
