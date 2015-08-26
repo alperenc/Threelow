@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
         
         while (repeat) {
             
-            NSString *cmd = [inputCollector inputForPrompt:@"roll or quit?"];
+            NSString *cmd = [inputCollector inputForPrompt:@"roll, reset or quit?"];
             
             if ([cmd isEqualToString:@"quit"]) {
                 repeat = NO;
@@ -48,7 +48,11 @@ int main(int argc, const char * argv[]) {
                     }
                 } while (invalidIndex);
                 
-            } else {
+            } else if ([cmd isEqualToString:@"reset"]) {
+                
+                [gameController resetDice];
+                
+            }else {
                 NSLog(@"Not a valid input");
             }
         }

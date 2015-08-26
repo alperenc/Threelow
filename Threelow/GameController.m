@@ -46,6 +46,10 @@
     }
 }
 
+-(void)resetDice {
+    [self.held removeAllObjects];
+}
+
 - (NSString *)description {
     NSString *description = @"\n";
     
