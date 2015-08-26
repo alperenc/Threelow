@@ -17,12 +17,15 @@
     if (self) {
         self.dice = [NSMutableArray new];
         self.held = [NSMutableSet new];
+        self.numberOfRolls = 0;
     }
     
     return self;
 }
 
 -(void)roll{
+    
+    self.numberOfRolls++;
     
     [self.dice removeAllObjects];
     
@@ -44,14 +47,28 @@
     } else {
         [self.held addObject:dice];
     }
+    
+    NSLog(@"%@", self);
 }
 
 -(void)resetDice {
     [self.held removeAllObjects];
+    self.numberOfRolls = 0;
+}
+
+-(int)score {
+    int score = 0;
+    for (Dice *dice in self.held) {
+        if (dice.currentValue != 3) {
+            score += dice.currentValue;
+        }
+    }
+    
+    return score;
 }
 
 - (NSString *)description {
-    NSString *description = @"\n";
+    NSString *description = [NSString stringWithFormat:@"Number of rolls: %d\n", self.numberOfRolls];
     
     for (Dice *dice in self.dice) {
         if ([self.held containsObject:dice]) {
@@ -60,6 +77,8 @@
             description = [description stringByAppendingString:[NSString stringWithFormat:@"%d\n", dice.currentValue]];
         }
     }
+    
+    description = [description stringByAppendingString:[NSString stringWithFormat:@"Score: %d\n", [self score]]];
     
     return description;
 }

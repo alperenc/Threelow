@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
                     NSArray *hold = [[inputCollector inputForPrompt:@"Dice to hold/unhold: "] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                     
                     for (NSString *index in hold) {
-                        int i =  [index intValue];
+                        int i =  [index intValue]; // TODO: Use NSNumberFormatter to check for non-numeric values
                         if (i < [gameController.dice count]) {
                             [gameController holdDie:gameController.dice[i]];
                             invalidIndex = NO;
@@ -52,7 +52,11 @@ int main(int argc, const char * argv[]) {
                 
                 [gameController resetDice];
                 
-            }else {
+            } else if ([cmd isEqualToString:@"score"]) {
+                
+                NSLog(@"Score: %d", [gameController score]);
+                
+            } else {
                 NSLog(@"Not a valid input");
             }
         }
